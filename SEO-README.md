@@ -1,6 +1,6 @@
-# DIGITAL LAB — SEO implementation
+# AA agency — SEO implementation
 
-Дата последнего аудита: 2026-10-14.
+Дата последнего аудита: 2026-10-21.
 
 ## Что реализовано
 - Статический HTML без клиентской гидратации Next.js.
@@ -13,8 +13,9 @@
 - Хлебные крошки и внутренняя перелинковка.
 - Отдельные страницы клиентов, о компании и контактов.
 - 404 с noindex.
-- Убрана фиктивная форма: CTA ведёт в реальный Telegram, указанный в исходном сайте.
-- Не добавлены выдуманные телефон, e-mail, адрес, отзывы, сертификаты и результаты кейсов.
+- Добавлена рабочая форма заявки с серверной отправкой на `andrewbaldov@yandex.ru`; все CTA ведут к форме, Telegram оставлен только в шапке.
+- Добавлены загрузочный экран AA, бегущая строка и логотипы клиентов из предоставленной версии.
+- Не добавлены выдуманные телефон, адрес, отзывы, сертификаты и результаты кейсов.
 - Исправлена мобильная шапка и управление меню с клавиатуры.
 - Добавлены skip-link, видимый focus, aria-current и связанные aria-controls.
 - Усилен контраст вторичного и мелкого текста до уровня WCAG AA.
@@ -24,27 +25,27 @@
 - Сокращены перегруженные Title у страниц комплексного маркетинга, SMM и VK Рекламы.
 
 ## Важно перед продакшеном
-Сайт сейчас привязан к GitHub Pages адресу `https://228blacklol228-debug.github.io/Tanakanreklama/`. Если будет собственный домен, массово заменить BASE_URL/BASE_PATH в HTML, robots.txt, sitemap.xml, Open Graph и JSON-LD. После переноса старый адрес нужно редиректить на новый там, где это технически возможно.
+Сайт привязан к собственному домену `https://agency-aa.ru/`. Canonical, Open Graph, JSON-LD, robots.txt и sitemap.xml используют этот адрес. Для отправки формы хостинг должен поддерживать PHP `mail()` и исходящую почту домена.
 
 ## Что невозможно сделать только кодом
 1. Добавить сайт в Яндекс Вебмастер и Google Search Console.
 2. Подтвердить регион и карточку в Яндекс Бизнес.
 3. Настроить Метрику/Search Console и реальные цели без ID счётчиков и доступов.
-4. Добавить NAP (телефон, e-mail, юридические данные, адрес) без реальных данных.
+4. Добавить полный NAP (телефон, юридические данные, адрес) без реальных данных.
 5. Создать полноценные кейсы без подтверждённых задач, периода и результатов.
 6. Нарастить внешние ссылки и упоминания.
 
 ## Страницы
-- https://228blacklol228-debug.github.io/Tanakanreklama/
-- https://228blacklol228-debug.github.io/Tanakanreklama/uslugi/
-- https://228blacklol228-debug.github.io/Tanakanreklama/uslugi/kompleksnyj-marketing/
-- https://228blacklol228-debug.github.io/Tanakanreklama/uslugi/yandex-direct/
-- https://228blacklol228-debug.github.io/Tanakanreklama/uslugi/vk-reklama/
-- https://228blacklol228-debug.github.io/Tanakanreklama/uslugi/sozdanie-sajtov/
-- https://228blacklol228-debug.github.io/Tanakanreklama/uslugi/vedenie-sajtov/
-- https://228blacklol228-debug.github.io/Tanakanreklama/uslugi/prodvizhenie-avito/
-- https://228blacklol228-debug.github.io/Tanakanreklama/uslugi/smm/
-- https://228blacklol228-debug.github.io/Tanakanreklama/uslugi/seo-prodvizhenie/
-- https://228blacklol228-debug.github.io/Tanakanreklama/klienty/
-- https://228blacklol228-debug.github.io/Tanakanreklama/o-kompanii/
-- https://228blacklol228-debug.github.io/Tanakanreklama/kontakty/
+- https://agency-aa.ru/
+- https://agency-aa.ru/uslugi/
+- https://agency-aa.ru/uslugi/kompleksnyj-marketing/
+- https://agency-aa.ru/uslugi/yandex-direct/
+- https://agency-aa.ru/uslugi/vk-reklama/
+- https://agency-aa.ru/uslugi/sozdanie-sajtov/
+- https://agency-aa.ru/uslugi/vedenie-sajtov/
+- https://agency-aa.ru/uslugi/prodvizhenie-avito/
+- https://agency-aa.ru/uslugi/smm/
+- https://agency-aa.ru/uslugi/seo-prodvizhenie/
+- https://agency-aa.ru/klienty/
+- https://agency-aa.ru/o-kompanii/
+- https://agency-aa.ru/kontakty/

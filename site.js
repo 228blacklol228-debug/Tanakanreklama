@@ -1,5 +1,25 @@
 
 (() => {
+  const loader = document.querySelector('.site-loader');
+  if (loader) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const shouldShow = document.documentElement.classList.contains('loader-new') && !reduceMotion;
+    try { window.sessionStorage.setItem('aa-loader-seen', '1'); } catch (_) {}
+
+    if (shouldShow) {
+      window.setTimeout(() => loader.classList.add('site-loader-exit'), 1550);
+      window.setTimeout(() => {
+        loader.remove();
+        document.documentElement.classList.remove('loader-new');
+        document.documentElement.classList.add('loader-seen');
+      }, 2150);
+    } else {
+      loader.remove();
+      document.documentElement.classList.remove('loader-new');
+      document.documentElement.classList.add('loader-seen');
+    }
+  }
+
   const menu = document.querySelector('.menu-button');
   const nav = document.querySelector('.nav');
   const mobile = window.matchMedia('(max-width: 900px)');
@@ -72,5 +92,61 @@
         framePending = false;
       });
     }, { passive: true });
+  }
+
+  document.querySelectorAll('[data-lead-form]').forEach((form) => {
+    const button = form.querySelector('button[type="submit"]');
+    const status = form.querySelector('.form-status');
+    const page = form.querySelector('input[name="page"]');
+    if (page) page.value = window.location.href;
+
+    const showStatus = (message, type) => {
+      if (!status) return;
+      status.textContent = message;
+      status.hidden = false;
+      status.classList.toggle('is-success', type === 'success');
+      status.classList.toggle('is-error', type === 'error');
+    };
+
+    form.addEventListener('submit', async (event) => {
+      if (!form.reportValidity()) return;
+      event.preventDefault();
+      if (page) page.value = window.location.href;
+      if (button) {
+        button.disabled = true;
+        button.setAttribute('aria-busy', 'true');
+      }
+      showStatus('Отправляем заявку…', 'pending');
+
+      try {
+        const response = await window.fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) throw new Error(result.message || 'Не удалось отправить заявку.');
+        form.reset();
+        if (page) page.value = window.location.href;
+        showStatus('Спасибо! Заявка отправлена. Мы ответим в течение рабочего дня.', 'success');
+      } catch (error) {
+        const reason = error instanceof Error ? error.message : 'Не удалось отправить заявку.';
+        showStatus(`${reason} Попробуйте ещё раз позднее.`, 'error');
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.removeAttribute('aria-busy');
+        }
+      }
+    });
+  });
+
+  if (new URLSearchParams(window.location.search).get('sent') === '1') {
+    const status = document.querySelector('[data-lead-form] .form-status');
+    if (status) {
+      status.textContent = 'Спасибо! Заявка отправлена. Мы ответим в течение рабочего дня.';
+      status.hidden = false;
+      status.classList.add('is-success');
+    }
   }
 })();
